@@ -1,0 +1,11 @@
+global:
+  scrape_interval:     15s               # The default scrape interval for all jobs
+  evaluation_interval: 15s               # The default evaluation interval for all rules
+
+
+scrape_configs:
+  - job_name: 'spring boot scrape'       # The name of the job (used for identification)
+    metrics_path: '/actuator/prometheus' # The path to access metrics from the target
+    scrape_interval: 2s                 # The scrape interval for this specific job
+    static_configs:
+      - targets: ['host.docker.internal:8080']  # The target to scrape metrics from

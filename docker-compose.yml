@@ -1,0 +1,20 @@
+version: '3'  # Docker Compose version
+
+services:
+  grafana:
+    image: grafana/grafana  # Use the official Grafana Docker image
+    ports:
+      - '3000:3000'  # Map host port 3000 to container port 3000 for Grafana
+
+  jaeger-service:
+    image: jaegertracing/all-in-one:latest  # Use the official Jaeger Docker image
+    ports:
+      - "16686:16686"  # Map host port 16686 to container port 16686 for Jaeger's web UI
+      - "6831:6831/udp"  # Map host port 6831 to container port 6831/udp for Jaeger's UDP port
+
+  prometheus:
+    image: prom/prometheus  # Use the official Prometheus Docker image
+    ports:
+      - '9090:9090'  # Map host port 9090 to container port 9090 for Prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount a local Prometheus configuration file
